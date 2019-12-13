@@ -1,12 +1,24 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+import React, {useState, useEffect} from 'react';
+import {render} from 'react-dom';
 
-ReactDOM.render(<App />, document.getElementById('root'));
-
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
+const Counter = () => {
+    //coutn相当于class中state, setCount相当于class中setState
+    const [count, setCount] = useState(0);
+    const [title, setTitle] = useState('abc')
+    //useEffect的参数是一个回调，不管是组件挂载还是更像，都会触发这个回调方法，类似于compomentDidMount和componentDidUpdate的结合
+    useEffect(() => {
+        console.log('update')
+    })
+    return (
+        <div>
+            <p>{title}</p>
+            <button onClick={() => {setCount(count - 1)}}>-</button>
+            <button>{count}</button>
+            <button onClick={() => {setCount(count + 1)}}>+</button>
+        </div>
+    )
+}
+render(
+    <Counter/>,
+    document.querySelector('#root')
+)
