@@ -1,0 +1,17 @@
+阅读顺序
+index.js
+store.js
+reducers/index.js
+reducers/cart.js
+actions/actionType.js
+actions/cart.js
+index.js
+components/CartList/index.js
+
+1. 创建reducers
+2. 合并reducers
+3. createStore
+4. Provider store={store}
+5. connect(mapStateToProps, {...actionCreators})(YourComponent)
+6. actionCreators
+7. 修改reducers
