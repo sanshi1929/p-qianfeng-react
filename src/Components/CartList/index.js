@@ -2,10 +2,10 @@ import React, { Component } from 'react'
 //connect方法执行之后是一个高阶组件
 import { connect } from 'react-redux'
 //导入actionCreators
-import {increment, decrement} from '../../actions/cart'
+import { increment, decrement, decrementAsync } from '../../actions/cart'
 
 class CartList extends Component {
-   
+
     render() {
         console.log(this.props)
         return (
@@ -43,9 +43,10 @@ class CartList extends Component {
                                                 this.props.increment(item.id)
                                             }
                                         }>+</button> */}
-                                        <button onClick={this.props.decrement.bind(this,item.id)}>-</button>
+                                        <button onClick={this.props.decrementAsync.bind(this, item.id)}>async-</button>
+                                        <button onClick={this.props.decrement.bind(this, item.id)}>-</button>
                                         <span>{item.amount}</span>
-                                        <button onClick={this.props.increment.bind(this,item.id)}>+</button>
+                                        <button onClick={this.props.increment.bind(this, item.id)}>+</button>
                                     </td>
                                     <td></td>
                                 </tr>
@@ -79,4 +80,4 @@ const mapState = (state) => {
 // export default connect(mapState,mapDispatchToProps)(CartList)
 
 //直接第二个参数传递一个对象，这里面的对象就是actionCreators,只要传入了actionCreator,在组件内就通过this.props.actionCreator来调用，这样的话，在调用之后，那个actionCreator就会自动把内部的action dispatch出去
-export default connect(mapState,{increment, decrement})(CartList)
+export default connect(mapState, { increment, decrement, decrementAsync })(CartList)

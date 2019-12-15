@@ -15,3 +15,22 @@ components/CartList/index.js
 5. connect(mapStateToProps, {...actionCreators})(YourComponent)
 6. actionCreators
 7. 修改reducers
+
+//只要在最外层包裹了这个Provider，那么所有后代组件都可以使用Redux.connect做连接
+<Provider store={store}>
+    createContext跨组件传值: Provider 提供状态， Consumer 接收状态
+    Store: 是用来维持所有state树的一个对象。 改变store 内 State 的唯一途径是对它一个dispath 一个action
+        getState(): 返回当前的树。 与store最后一个reducer返回值相同
+        dispatch(action): 会使用当前 getState() 的结果和传入的 action 以同步方式的调用 store 的 reduce 函数。返回值会被作为下一个                       state。从现在开始，这就成为了 getState() 的返回值，同时变化监听器(change listener)会被触发
+        suscribe(listener): 添加一个变化监听器。每当 dispatch action 的时候就会执行，state 树中的一部分可能已经变化。你可以在回调函数里                      调用 getState() 来拿到当前 state。
+
+export default  createStore(rootReducer)
+    Reducers 指定了应用状态的变化如何响应 actions 并发送到 store 的，记住 actions 只是描述了有事情发生了这一事实，并没有描述应用如何更新 state。
+
+connect方法有四个参数，常用来就是前面两个
+    第一个参数是mapStateToProps, 作用就是从store里把state注入到当前组件的props上
+    第二个参数可以是mapDispatchToProps,这个的主要作用是把action生成的方法注入到当前组件的props上
+
+actionCreators -> 自动dispatch(actionCreator()) -> reducer -> store ->view
+actionCreators -> middleware处理生成新的action -> 手动dispatch(action) -> reducer -> store ->view
+    npm i redux-thunk -S
